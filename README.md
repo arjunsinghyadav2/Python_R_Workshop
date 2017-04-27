@@ -39,7 +39,7 @@
   (i) XGBOOST 
   (x) A brief Touch on Deep Learning
   
-### The workshop will be wrapped up with
+### Finishing the workshop with
 ### a end to end machine learning kaggle problem.
 
 
