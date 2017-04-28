@@ -1,0 +1,858 @@
+---
+title: "Introduction to R Part 1"
+author: "Arjun Singh Yadav"
+date: "28 April 2017"
+output: html_document
+---
+
+# Introduction to R part 1
+
+### Key Features of R:
+Open Source and Free
+
+Powerfull and Scalable
+
+Lightweigt and Multi-platform
+
+### Extensibility of R:
+Can connect to databases as Oracle, MySQL
+
+Can call C, C++ and Fortran code
+
+Can be used as an embeded computing engine (Rserver)
+
+Can be used to deploy Interactive apps (Shiny)
+
+### Drawbacks:
+Data is read in Memory 
+
+R is single threaded, limiting speed and efficiency
+
+## What would we learn in this session
+#### R Objects
+Function call and variables
+
+Primitive data types
+
+Vectors Matrices and arrays
+
+Data Frames
+
+Lists 
+
+#### Fuctional Programming:apply
+
+
+```
+#Installing any package in R can be done by
+
+#install.packages("packagename")
+
+#importing the package in the environment can be done by
+
+#library(packagename)
+
+```
+### Variables
+
+Variable is a symbolic name if a storage location
+
+```{r , echo=TRUE}
+x=2
+print(x)
+
+```
+
+
+### Function Call
+
+As all other languages like python, java,sql, function takes a argument, given
+a parentheses and return values, multiple arguments can be seperated by commas.
+
+Some functions are built into R. When we call a function, just as when you
+write any other expression, RStudio prints result.
+
+```{r , echo=TRUE}
+sin(0)
+log(100,10)
+x <- pi/2 
+print (x)
+```
+
+
+### Primitive Data Types
+
+Numeric: The data type for real number, A number is assumed by R to be of type
+"numeric" even if it is an integer.
+
+Character: The data type for a string.
+
+Logical: TRUE OR FALSE
+
+Factor: Categorical variable that cna be either numeric or string variable.
+These repressent groups.
+
+Integer: 7L where 7 is a integer, 7 is a real number while 7.0 is a float type.
+
+```{r , echo=TRUE}
+#to check data type use
+class(2)
+```
+
+
+### Logical Operators
+AND
+```
+1==1 & 2==3
+```
+
+OR
+```{r , echo=TRUE}
+1==1 | 2==3
+```
+
+NOT
+```{r , echo=TRUE}
+!(1==1)
+```
+
+
+### Type Converstion
+```{r , echo=TRUE}
+as.integer(5.6)
+as.character(5.6)
+```
+
+There is one more way using
+```{r , echo=TRUE}
+#as.type()
+```
+
+
+### Data Objects
+
+Vectors: Sequece of primitive data types.
+```{r , echo=TRUE}
+c(1,2,3,4)
+c('ad','cd','ef')
+c('ab',3)
+
+x <- c(1,2,3)
+y <- c('ab','x')
+c(x,y)
+
+seq(1,10)
+
+seq(1,10,by=2)
+
+seq(1,10,length=5)
+
+rnorm(10)
+
+runif(5)
+
+sample(c('A','B'), size=10, replace=TRUE)
+
+rep(0,10)
+
+rep(c(1,2,3),5)
+
+rep(c(1,2,3),c(3,5,1))
+
+#slicing
+x = c(1,2,3,4,5)
+x[1]
+
+#naming of vector
+v = 10:15
+names(v) = c('a', 'b', 'c', 'd', 'e', 'f')
+v
+
+v['a']
+
+#vector computation
+c(1,2,3,4) + c(5,6,7,8)
+
+c(1,2,3,4) + c(1,2) 
+
+#Logical computation
+x = c(1,2,3,4)
+x[ x>=2 & x<4 ] 
+
+x = c(1,2,3,4)
+exp(x)
+
+max(x)
+min(x)
+mean(x)
+
+```
+
+#### Exercise
+Find your current working directory
+
+Get documentation for function 'lm'
+
+Run function ls(), check what does it print out?
+
+Check how to remove everythign in a workspace by using rm().
+
+Assign the text "Hello world by" to x
+
+Assign a y variable with your name
+
+Use function cat(), learn what it does, try cat(x,y)
+
+
+### Matrices
+
+#### Matrix: Two Dimentional collection of primitve data objects.
+
+```{r , echo=TRUE}
+my_mat = matrix(1:12,4,3)
+print (my_mat)
+
+
+my_mat = matrix(1:12, nrow=4, ncol=3)
+
+v <- 1:12
+dim(v) <- c(4, 3) 
+print (v)
+
+#cbind()
+vector1 <- 1:4
+vector2 <- 5:8
+vector3 <- 9:12
+cbind(vector1, vector2, vector3)
+
+#Matrix slicing
+my_mat
+#try
+my_mat[1,2]
+
+my_mat[1, 1:3] # first row, all columns
+
+my_mat[-1, ] # omit first row; all columns
+
+my_mat[1, ]
+
+my_mat[ , 2]
+
+my_mat[ , 2, drop=F] #if you want to keep the structure in mat
+
+#operations on matrices
+my_mat + 1
+
+(my_mat + 1) - my_mat
+
+mean(my_mat)
+
+```
+
+### Arrays
+
+Array: Multi- dimentional collection of premitive data objects.
+```{r , echo=TRUE}
+a <- array(1:24, dim = c(3,4,2))
+print(a)
+```
+
+### DataFrames
+
+Data frames are spreadsheets like datastructure in which data type of different
+columns can be different.
+
+Both columns and rows are labeled, columns always have descriptive names and
+rows are labeled by sequential indices. 
+
+
+DataFrame: Matrix with labelled columns and rows. Like a spreadsheet
+
+#### Creating Dataframe
+```{r , echo=TRUE}
+city = c('Seattle', 'Chicago', 'Boston', 'Houston')
+temp = c(78, 74, 50, 104)
+
+citydf <- data.frame(city=city, temp=temp)
+citydf
+
+citydf <- data.frame(city, temp)
+citydf
+
+colnames(citydf) = c('CITY', 'TEMP')
+citydf
+
+citydf <- data.frame(city, temp,
+ row.names=c('a', 'b', 'c', 'd'))
+citydf
+
+citydf = data.frame(city, temp)
+
+citydf[3,]
+
+citydf[, 1, drop=F]
+
+#my fav type 
+
+citydf$city
+
+```
+
+#### Selecting and Slicing Data Frames
+
+```{r , echo=TRUE}
+ave = mean(citydf$temp)
+
+citydf[citydf$temp > ave, ]
+
+```
+
+#### Function on DataFrames
+```{r , echo=TRUE}
+dim(citydf)
+head(citydf)
+str(citydf)
+summary(citydf)
+order(citydf$temp) #order returns row indices in increasing.
+
+citydf[order(citydf$temp),]
+
+```
+
+#### Sorting DataFrames
+```{r , echo=TRUE}
+order(citydf$temp, decreasing=TRUE)
+
+citydf[order(citydf$temp, decreasing=TRUE),]
+```
+
+#### Exporting and Importing a DataFrame
+```{r , echo=TRUE}
+#Exporting
+write.csv(citydf, file='my_data.csv', row.names=F)
+
+#Importing
+read.csv('my_data.csv')
+
+```
+
+### Lists
+
+List: Collection of names values, possibly of different types
+
+List have heterogenous data, it is also the most flexible type of R object.
+
+```{r , echo=TRUE}
+#Creating list
+employee = list(Name='John', Position='cashier',Salary=9.50)
+print (employee)
+
+
+student <- list(Name="Peter",Classes =c("Bio101","Psych200","CS125"))
+ 
+print(student)
+
+#slicing 
+student[2]
+
+class(student[2])
+
+student['Name'] # or student$Name
+
+employee[-1] 
+
+employee[c("Name", "Position")]
+
+employee$Name
+
+employee[[1]]
+
+#Modifying a list
+
+employee$Position = 'manager'
+employee[[3]] = 10.50
+employee
+
+
+```
+
+### Functional Programming
+
+```{r , echo=TRUE}
+data(iris)
+
+v = 1:4
+sapply(v, sqrt)
+
+sapply(iris[ ,1:4], mean) #return a vector
+
+lapply(v, mean) #returns the value in list
+
+#apply
+mat = matrix(1:6, nrow=2, ncol=3)
+
+apply(mat, 1, sum) # across rows
+
+apply(mat, 2, sum) # across columns
+
+```
+################################ END #######################################
+
+
+# Introduction to R part 2
+
+### More Data Types
+Charaters
+
+Factors
+
+### Control Statement
+Conditional
+
+Loops
+
+### Functions
+
+### Data Transformations 
+
+#### Charater Manupulation
+
+➢ nchar(): Count the number of characters. 
+
+➢ strsplit(): Split the elements of a character vector.
+
+➢ paste(): Concatenate strings. 
+
+➢ substr(): Create substrings of a character vector.
+
+➢ gsub(): Replace parts of strings. 
+
+➢ grep(): Complete pattern matching.
+
+#### Character Functions: nchar
+```{r , echo=TRUE}
+fruit = 'apple orange grape banana'
+nchar(fruit)
+
+test = '10+$ 0f $ymb01$!'
+nchar(test)
+```
+
+#### Character Functions: strsplit
+
+```{r , echo=TRUE}
+fruit = 'apple orange grape banana'
+strsplit(fruit, split=' ')
+
+fruitvec = strsplit(fruit, split=' ')[[1]]
+print(fruitvec)
+```
+
+#### Character Functions: paste
+
+```{r , echo=TRUE}
+paste(fruitvec, c('A', 'B'))
+
+paste(fruitvec, c('A', 'B', 'C'), sep='::')
+
+paste(fruitvec, collapse=',')
+
+paste(fruitvec, c('A', 'B'), sep=':', collapse='@')
+```
+
+#### Character Functions: gsub
+
+```{r , echo=TRUE}
+gsub('apple', 'strawberry', fruit)
+
+gsub('a', '?', fruit)
+
+gsub('an', 'HA', fruit)
+
+```
+#### Character Functions: grep
+
+```{r , echo=TRUE}
+grep('grape', fruitvec)
+grep('a', fruitvec)
+grep('an', fruitvec)
+
+```
+### Factors 
+Factors represent categorical values or discrete values that might be used as discriminators in statistical test.
+
+```{r , echo=TRUE}
+data(iris)
+species = iris$Species 
+class(species)
+
+print(species)
+
+levels(species)
+
+class(levels(species))
+
+ranks <- c(4, 1, 1, 4, 3, 3, 2, 3, 2, 4)
+rank_factor = factor(ranks)
+rank_factor
+
+# CUT
+#The cut() function is used to divide an integer vector into intervals to be
+#used as factors.  cut() divides a numeric vector into a specified number of
+#interval sections:
+
+x = c(1, 2, 3, 4, 5, 6, 7, 8) 
+f = cut(x, 3)
+class(f)
+
+print(f)
+
+```
+
+### Control Statement
+#### Conditionals
+
+```{r , echo=TRUE}
+num = 5
+if (num %% 2 != 0) {
+  cat(num, 'is odd') 
+}
+
+num = 4
+if (num %% 2 != 0) {
+  cat(num, 'is odd')
+  } else {
+  cat(num, 'is even')
+}
+
+# more loops as For , if else , while etc
+
+```
+
+### Functions
+
+```{r , echo=TRUE}
+name = function(arguments) {
+  body
+  return(expression)
+}
+```
+
+### Data Transformations
+
+#### Merge and Split
+ “Data transformation” is a very general term that could be used to reference
+ many operations on data. In data science and engineering, it generally refers
+ to non-numerical operations that rearrange and combine data.
+ 
+We will see many data transformations in R. In a future class, we will look at
+dplyr, an entire package devoted to transformations.
+ 
+ Here we introduce a few widely used functions for combining data frames and
+ splitting them apart.
+
+
+#### Merge Two Data Frames
+
+```{r , echo=TRUE}
+
+genders = data.frame(id=c(1,2,3), gender=c('M', 'F', 'M'))
+names = data.frame(id=c(3,1,2), name=c('tom','john','mary'))
+
+merge(genders, names, by='id')
+```
+
+#### Split into Groups
+```{r , echo=TRUE}
+iris_split = split(iris, iris$Species) 
+class(iris_split)
+
+attributes(iris_split)
+
+str(iris_split)
+
+##### Use function Unsplit to undo what split performed.
+iris_unsplit <- unsplit(iris_split, iris$Species)
+class(iris_unsplit)
+
+iris_unsplit[c(1, 51, 101), ]
+```
+
+###################################### END ###################################
+
+# Dplyr
+Dplyr packageprovides functions for effective manipulation of data frames
+1) Filtering and rearranging.
+2) Joins
+3)Groupwise operations- aggregation
+
+### Basic dplyr functions
+Filter - take subset of rows
+
+Select - Take subset of columns
+
+Arrange - Reorder Rows
+
+Mutate/ transmute - Add or replace columns
+
+Summarise - Compute aggregate values
+
+Various Joins - Inner, outer, Full , Semi
+
+#### Baby birth dataset
+```{r}
+births <- read.csv("data/births.csv",stringsAsFactors = FALSE)
+births[c(1:2, 131:132),]
+
+bnames <- read.csv("data/bnames.csv",stringsAsFactors = FALSE)
+head(bnames, 5)
+
+mike = bnames[bnames$name == "Mike", ] 
+head(mike, 3)
+ 
+```
+### Built in Functions
+#### Filter and Select
+
+```{r, echo=TRUE}
+df = data.frame(color = c("blue","black", "blue", "blue","black"),value = 1:5)
+
+print(df)
+
+#import the package
+library(dplyr)
+
+# Filter
+filter(df, color == "blue")
+
+#you can also achieve the same result by doing
+df[df$color == "blue",]
+
+filter(df, value %in% c(3, 4, 5)) # note no $ sign is needed to call column value
+
+filter(df, value %in% c(3, 4, 5) & color=='blue')
+
+filter(df, value %in% c(1, 4) | color=="black")
+
+# Select
+select(df, color)
+
+select(df, color, value)
+
+select(df, -color)
+
+# Select can also be used with coditions
+#starts_with(x, ignore.case=T)
+#ends_with(x, ignore.case=T)
+#contains(x, ignore.case=T)
+#matches(x, ignore.case=T)
+#one_of(name_1, name_2, name_n)
+
+#Example
+select(df, starts_with('c'))
+
+# Select and Rename
+
+df = rename(df, COLOR = color)
+
+```
+#### Arrange and Multate
+ Arrange positions the rows of the dataframe in ascentding order according to
+ values in specific columns
+ 
+```{r, echo=TRUE}
+df = data.frame(color = c("blue","black", "blue", "blue","black"),value = 1:5)
+arrange(df, value)
+ 
+arrange(df, desc(value)) 
+ 
+arrange(df, color)
+ 
+# Mutate
+#Mutate fuction creates a new column by derivinf its value from old column
+ 
+mutate(df, double =value*2)
+ 
+mutate(df, double = 2 * value, quadruple = 4 * value)
+
+#Transmute
+# Transmute only keeps the new column and deletes the old ones
+
+transmute(df, double = 2 * value, quadruple = 4 * value)
+
+```
+### Summarise
+
+We often need to extract summary information about columns, for finding mean or
+sd of feature.
+```{r, echo=TRUE}
+summarise(df, total = sum(value)) 
+
+summarise(df, total = sum(value),avg = mean(value))
+
+# you can use min() max() mean() sum() sd() median()
+# n():returns the number of observations
+#n_distinct(x): returns the number of unique values in the column
+#first(x) last(x): returns the first or last observations in the column x
+#nth(x,n): returns the nth observation in the column x
+
+summarise(df, n_distinct(color))
+
+summarise(df, nth(value, 4))
+
+```
+
+### Join data sets
+
+```{r, echo=TRUE}
+x = data.frame( name = c("John", "Paul", "George",
+                          "Ringo", "Stuart", "Pete"),
+                instrument = c("guitar", "bass", "guitar",
+                                "drums", "bass", "drums"),
+                stringsAsFactors = FALSE)
+print(x) 
+
+y <- data.frame( name = c("John", "Paul", "George",
+                          "Ringo", "Brian"),
+                band = c(TRUE, TRUE, TRUE,
+                         TRUE, FALSE),
+                stringsAsFactors = FALSE)
+print(y)
+
+#Inner Join
+inner_join(x, y, by = "name")
+
+# Left Join
+
+left_join(x, y, by = "name")
+
+right_join(x, y, by = "name")
+
+full_join(x, y, by = "name")
+
+semi_join(x, y, by = "name")
+
+
+```
+### Group By and Summarise
+
+####Group_by
+
+```{r , echo=TRUE}
+by_color = group_by(df, color) 
+class(by_color) 
+
+summarise(by_color, total = sum(value))
+
+```
+
+### The %>% operator
+
+```{r , echo=TRUE}
+# group by and summarise
+library(dplyr)
+
+bnames <- read.csv("data/bnames.csv",stringsAsFactors = FALSE)
+
+group_by(bnames, name, year)
+
+bnames %>% group_by(., name, year)
+
+bnames %>% group_by(name, year)
+
+```
+
+############################ END ###########################################
+
+# GGPLOT2
+
+```{r iris, echo=TRUE}
+# a simple plot without help of ggplot2
+data(iris)
+
+plot(iris$Sepal.Width, iris$Sepal.Length)
+
+```
+
+# Grammar of Graphics
+data: R dataframe
+aesthetics: values that will be plotted, eg. x and y values, plus color and
+shape of dots for a scatter plot.
+
+geoms: the type of plot
+
+facets: side by side plots
+
+stats: statistical transformation like binning and smoothing
+
+scales: adjust sizes
+
+coordinates: what coordinate system to use
+
+themes: overall presentation
+
+### Constructing a ggplot2 plot
+
+```{r , echo=TRUE}
+library(ggplot2)
+
+#Scatter plot
+
+#mpg
+head(mpg)
+
+g <- ggplot(data = mpg, aes(x = displ, y = hwy))
+g + geom_point()
+
+#AESTHETICS 
+g + geom_point(aes(color = class))
+g + geom_point(aes(size = class))
+g + geom_point(aes(shape = class))
+g + geom_point(aes(alpha = class))
+
+# plotting one of these
+g + geom_point(aes(color = class))
+
+# Faceting
+#facet_grid(): 2d grid, rows ~ cols, . is a placeholder that can be used if you
+#              don't want a split.
+
+#facet_wrap(): 1d ribbon wrapped into 2d.
+
+g + geom_point() + facet_grid(. ~ cyl)
+g + geom_point() + facet_grid(drv ~ .)
+g + geom_point() + facet_grid(drv ~ cyl)
+g + geom_point() + facet_wrap( ~ class)
+
+#Geoms
+# they create statistical plotting over scatter plots, showing a trend
+g + geom_smooth() # method = "auto" is the default
+
+# this case plots both the stats and the points
+g + geom_point() + geom_smooth()
+
+#you can use different methods in stats
+g + geom_point() + geom_smooth(method = "lm")
+
+#example
+
+ggplot(data = mpg, aes(x = class, y = hwy)) + geom_point()
+
+
+g <- ggplot(data = mpg, aes(x = class, y = hwy))
+g + geom_boxplot()
+
+# BOXPLOTS
+
+ggplot(data = mpg, aes(x = reorder(class, hwy), y = hwy)) + geom_boxplot()
+
+ggplot(data = mpg,aes(x=reorder(class,hwy,median), y = hwy)) + geom_boxplot()
+
+#There is a lot we can do in ggplots refer to  http://docs.ggplot2.org/
+
+```
+
+########################## END ###############################################
+
+
+
