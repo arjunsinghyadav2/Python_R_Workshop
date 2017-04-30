@@ -1,7 +1,7 @@
 # Python_R_Workshop
 ### A high level understanding of Machine Learning:
 
-## DAY-1
+## Part-1
 1) Introduction to R Part1
 2) Introduction to R Part2
 3) Maipulating Data Using "DPLYR"
@@ -20,7 +20,7 @@
   (g) Time Series Analysis
   (h) Facebook Prophet
 
-## DAY - 2
+## PART - 2
 1) Python Introduction
 2) Python with pandas
 3) Matplotlib and Seaborn
