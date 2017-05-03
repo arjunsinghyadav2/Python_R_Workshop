@@ -4,7 +4,7 @@
 ## Part-1
 1) Introduction to R Part1
 2) Introduction to R Part2
-3) Maipulating Data Using "DPLYR"
+3) Manipulating Data Using "DPLYR"
 4) Brief Look into GGPLOT2
 5) Some Useful Packages in R
 6) Machine Learning Part 1
