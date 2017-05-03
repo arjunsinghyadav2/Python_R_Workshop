@@ -33,7 +33,7 @@
   (f) SVM
   (g) Tree Models
   (h) Association and Naive Bayes
-  (i) Pricipal Component Analysis
+  (i) Principal Component Analysis
   (j) Clustering
   (h) Unsupervised Learning
   (i) XGBOOST 
