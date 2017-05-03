@@ -13,7 +13,7 @@
   (c) Missing value and Imputation
   (d) Simple Linear Regression
   (e) Multiple Linear Regression
-  (f) Generalised Linear Model and kNN Model
+  (f) Generalized Linear Model and kNN Model
   (g) Regularization and Cross Validation
   (e) Tree Models, Bagging , Boosting , Random Forest
   (f) SVM
