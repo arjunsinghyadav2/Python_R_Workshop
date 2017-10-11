@@ -30,11 +30,15 @@ MacOS - Follow the following steps
 - https://www.andrewheiss.com/blog/2012/04/17/install-r-rstudio-r-commander-windows-osx/
 
 '''
-### A high level understanding of Machine Learning:
+# You will Learn the Following in this Repository:
 
-## Part-1
+### A high level understanding of Stastics and Analytics using R and Python:
+
+## Start with the Folder - Python and R basics
+
+### Part-1
 1) R
-## PART - 2
+### PART - 2
 1) Python
   
 ### Finishing the workshop with
