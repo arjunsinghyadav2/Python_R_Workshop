@@ -10,7 +10,7 @@ https://www.anaconda.com/download/
 
 Once you complete the installation, if you need to install any python packages use following steps:
 1) open anaconda prompt or windows command prompt
-2) type the following " pip install <package name> " or you could use "conda install <ppackage name>"
+2) type the following " pip install package_name " or you could use "conda install package_name"
   
 Anaconda comes pre installed with Jupyter Notebook and few other software:
 Jupyter Notebook is a great way to start if you are just exploring python.
